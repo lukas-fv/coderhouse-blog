@@ -23,5 +23,15 @@ def add_category(request):
 
 def search(request):
     query = request.GET.get('query', '')
-    posts = Post.objects.filter(title__icontains=query)
+    posts = Post.objects.filter(title__icontains=query) if query else []
     return render(request, 'blog/search.html', {'posts': posts, 'query': query})
+
+def add_post(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = PostForm()
+    return render(request, 'blog/add_post.html', {'form': form})

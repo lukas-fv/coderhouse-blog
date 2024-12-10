@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h2>Buscar Publicaciones</h2>
+    <form method="get">
+        <label for="query">Título de la publicación:</label>
+        <input type="text" id="query" name="query" value="{{ request.GET.query }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if query %}
+        <h3>Resultados para "{{ query }}":</h3>
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <strong>{{ post.title }}</strong> por <em>{{ post.author }}</em><br>
+                    Categoría: {{ post.category.name }}<br>
+                    {{ post.content|truncatewords:20 }}
+                </li>
+            {% empty %}
+                <li>No se encontraron resultados.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

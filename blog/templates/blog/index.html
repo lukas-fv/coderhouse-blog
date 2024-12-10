@@ -1,10 +1,21 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h2>Todos los posts (proximamente)</h2>
+    <h1>Bienvenido al blog</h1>
+    <p>Explora las publicaciones más recientes:</p>
+
+    <h2>Publicaciones</h2>
     <ul>
         {% for post in posts %}
-            <li>{{ post.title }} ({{ post.category.name }})</li>
+            <li>
+                <strong>{{ post.title }}</strong> por <em>{{ post.author }}</em><br>
+                Categoría: {{ post.category.name }}<br>
+                {{ post.content|truncatewords:20 }}
+            </li>
+        {% empty %}
+            <li>No hay publicaciones disponibles.</li>
         {% endfor %}
     </ul>
+
+    <a href="/add_post/">Agregar Nueva Publicación</a>
 {% endblock %}

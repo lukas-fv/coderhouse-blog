@@ -2,19 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora y psicología</title>
+    <style>
+        /* Estilo general */
+        body {
+            background-color: #121212; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Encabezado */
+        header {
+            background-color: #1f1f1f;
+            padding: 10px 20px;
+            text-align: center;
+            border-bottom: 2px solid #333333;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        /* Barra de navegación */
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #76c7c0; /* Texto de enlaces */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contenido principal */
+        main {
+            padding: 20px;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #1f1f1f;
+            color: #aaaaaa;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        /* Botones */
+        button {
+            background-color: #76c7c0; /* Color del botón */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5aa8a0;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Bienvenido</h1>
+        <h1>Bítacoras de psicología -  Ciencias cognitivas </h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/categories/">Categorias</a>
+            <a href="/">Inicio</a>
+            <a href="/categories/">Categorías</a>
+            <a href="/add_post/">Nuevo Post</a>
+            <a href="/search/">Buscar</a>
         </nav>
     </header>
     <main>
         {% block content %}
+
         {% endblock %}
     </main>
+    <footer>
+        <p>&copy; 2024 Blog - Lukas B. Valenzuela</p>
+    </footer>
 </body>
 </html>
