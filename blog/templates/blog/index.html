@@ -1,21 +1,32 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>Bienvenido al blog</h1>
-    <p>Explora las publicaciones más recientes:</p>
-
+{% load static %}
+    <h1>Explora las publicaciones más recientes:</h1>
+    
     <h2>Publicaciones</h2>
-    <ul>
+    <section>
         {% for post in posts %}
-            <li>
-                <strong>{{ post.title }}</strong> por <em>{{ post.author }}</em><br>
-                Categoría: {{ post.category.name }}<br>
-                {{ post.content|truncatewords:20 }}
-            </li>
+            <article>
+                <h3>{{ post.title }}</h3>
+                
+                {% if post.image %}
+                    <img src="{% static 'images/post_images/' %}{{ post.image }}" alt="{{ post.title }}" style="width: 100%; max-width: 400px; height: auto;">
+                {% endif %}
+
+                <p>{{ post.content|truncatewords:60 }}</p>
+                <p><strong>Autor:</strong> {{ post.author }} | <strong>Categoría:</strong> {{ post.category.name }}</p>
+                <p><strong>Fecha:</strong> {{ post.created_at|date:"F j, Y" }}</p>
+                <a href="{% url 'post_detail' slug=post.slug %}">Ver más</a>
+
+            </article>
         {% empty %}
-            <li>No hay publicaciones disponibles.</li>
+            <p>No hay publicaciones disponibles.</p>
         {% endfor %}
-    </ul>
+    </section>   
 
     <a href="/add_post/">Agregar Nueva Publicación</a>
 {% endblock %}
+
+
+<!- aca podemos modificar el listado de articulos, está deberia ser nuestra página principal para mostrar el catalogo y además ingresar a los textos -->

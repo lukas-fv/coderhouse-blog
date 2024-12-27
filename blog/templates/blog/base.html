@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácora y psicología</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'estilos.css' %}">
     <style>
         /* Estilo general */
         body {
@@ -48,6 +50,7 @@
         /* Contenido principal */
         main {
             padding: 20px;
+            text-aling: center;
         }
 
         /* Pie de página */
@@ -55,11 +58,11 @@
             background-color: #1f1f1f;
             color: #aaaaaa;
             text-align: center;
-            padding: 10px;
+            padding: 6px;
             position: fixed;
             bottom: 0;
             width: 100%;
-            font-size: 14px;
+            font-size: 10px;
         }
 
         /* Botones */
@@ -79,19 +82,23 @@
 </head>
 <body>
     <header>
-        <h1>Bítacoras de psicología -  Ciencias cognitivas </h1>
+        <h1>Bítacoras de Ciencias Cognitivas </h1>
         <nav>
             <a href="/">Inicio</a>
             <a href="/categories/">Categorías</a>
             <a href="/add_post/">Nuevo Post</a>
             <a href="/search/">Buscar</a>
+            <a href="/about_me/">Acerca de mí</a>
         </nav>
     </header>
+
     <main>
         {% block content %}
 
         {% endblock %}
     </main>
+
+
     <footer>
         <p>&copy; 2024 Blog - Lukas B. Valenzuela</p>
     </footer>

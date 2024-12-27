@@ -1,0 +1,55 @@
+/* Estilos para los artículos */
+article {
+    background-color: rgb(3, 119, 168);  /* Un color más suave */
+    border-radius: 10px;  /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(29, 89, 1, 0.659);  /* Sombra sutil */
+    display: inline-block;
+    margin: 1rem;
+    padding: 1rem;
+    width: calc(33% - 2rem);  /* Tres artículos por fila con un pequeño margen */
+    box-sizing: border-box;  /* Para asegurarnos de que el padding no afecta el tamaño */
+}
+
+/* Título del artículo */
+article h3 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #cdcaca;  /* Un color oscuro para el título */
+}
+/* Imagen del artículo */
+article img {
+    max-width: 100%;  /* Asegura que la imagen no se salga del contenedor */
+    height: auto;  /* Mantiene la proporción de la imagen */
+    border-radius: 5px;  /* Bordes redondeados para la imagen */
+    margin-bottom: 1rem;  /* Separación entre la imagen y el texto */
+}
+
+/* Pie de página con información adicional */
+article footer {
+    font-size: 0.9rem;
+    color: #555;  /* Color gris para el pie de página */
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Asegúrate de que los artículos se alineen bien en pantallas grandes */
+@media (min-width: 768px) {
+    article {
+        width: calc(33% - 2rem);  /* Tres artículos por fila en pantallas grandes */
+    }
+}
+
+/* En pantallas más pequeñas, ajustamos a dos artículos por fila */
+@media (max-width: 768px) {
+    article {
+        width: calc(50% - 2rem);  /* Dos artículos por fila */
+    }
+}
+
+/* En pantallas muy pequeñas, ajustamos a un artículo por fila */
+@media (max-width: 480px) {
+    article {
+        width: 100%;  /* Un artículo por fila */
+    }
+}

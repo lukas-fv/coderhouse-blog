@@ -35,3 +35,10 @@ def add_post(request):
     else:
         form = PostForm()
     return render(request, 'blog/add_post.html', {'form': form})
+
+def about_me(request):
+    return render(request, "blog/about_me.html")
+
+def post_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    return render(request, 'blog/post_detail.html', {'post': post})

@@ -9,7 +9,7 @@ class CategoryForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category', 'author']
+        fields = '__all__'
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -17,4 +17,4 @@ class UserForm(forms.ModelForm):
         fields = '__all__'
 
 class SearchForm(forms.Form):
-    query = forms.CharField(label='Search', max_length=100)
+    query = forms.CharField(label='Buscar Articulos', max_length=100)
