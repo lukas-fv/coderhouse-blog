@@ -1,10 +1,17 @@
 {% extends 'blog/base.html' %}
-
+{% load static %}
 {% block content %}
 <body>
-Este blog fue creado por Lukas Valenzuela, Licenciado en Psicología de la UAI, con interés de difundir articulos de interés para el público general
-con temas desde la psicología, filosofía de la mente, inteligencia artificial, estadísticas, data science, neurociencias, entre otras. Buscamos divulgar
-las ciencias cognitivas en general.
-Si deseas ser parte del proyecto no dudes en escribir a lukasfbv@gmail.com
+Este blog fue creado con interés de difundir articulos para todo público con temas diversos tales como (y no limitados a): psicología, filosofía de la mente, filosofía continental/analítica, inteligencia artificial, 
+estadísticas, data science, neurociencias, Python, entre otros.
+<div style="padding: 20px;">
+	Buscamos divulgar las ciencias cognitivas en general
+	<br>
+	Si deseas ser parte del proyecto o dar comentarios y criticas no dudes en escribir a lukasfbv@gmail.com
+</div>
+
+<div style="text-align: center;">
+	<img src="{% static 'images/post_images/' %}{{ "images5.jpg" }}" alt="{{ "Esquema ilustrativo (Varela et al., 1997)"}}" style="width: 100%; max-width: 500px; height: 400px;">
+</div>
 </body>
 {% endblock %}
