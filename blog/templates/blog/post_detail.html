@@ -1,15 +1,27 @@
 {% extends 'blog/base.html' %}
-{% load static %}
-{% block content %}
-    <h1>{{ post.title }}</h1>
-    
-    {% if post.image %}
-		<img src="{% static 'images/post_images/' %}{{ post.image }}" alt="{{ post.title }}" style="width: 100%; max-width: 800px; height: auto;">
-    {% endif %}
 
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>
-    <p><strong>Autor:</strong> {{ post.author }} | <strong>Categoría:</strong> {{ post.category.name }}</p>
-    <p><strong>Fecha:</strong> {{ post.created_at|date:"F j, Y" }}</p>
-    
-    <!-- Aquí podrías agregar un formulario de comentarios -->
+
+    <hr>
+    <h3>Comentarios</h3>
+    {% for comment in comments %}
+        <div class="mb-3">
+            <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
+            <p class="text-muted">{{ comment.created_at|date:"d M Y, H:i" }}</p>
+        </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Comentar</button>
+    </form>
+    {% else %}
+    <p>Inicia sesión para comentar.</p>
+    {% endif %}
+</div>
 {% endblock %}

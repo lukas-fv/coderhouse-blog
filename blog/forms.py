@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Post, User
+from .models import Category, Post, User, Profile, Comment
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -18,3 +18,17 @@ class UserForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField(label='Buscar Articulos', max_length=100)
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'profile_picture']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Escribe tu comentario aquí...'}),
+        }

@@ -2,31 +2,76 @@
 
 {% block content %}
 {% load static %}
-    <h1>Explora las publicaciones más recientes:</h1>
-    
-    <h2>Publicaciones</h2>
-    <section>
-        {% for post in posts %}
-            <article>
-                <h3>{{ post.title }}</h3>
-                
-                {% if post.image %}
-                    <img src="{% static 'images/post_images/' %}{{ post.image }}" alt="{{ post.title }}" style="width: 100%; max-width: 400px; height: auto;">
-                {% endif %}
+<div class="container">
+    <h1 class="mt-4 mb-4">Explora las publicaciones más recientes:</h1>
 
-                <p>{{ post.content|truncatewords:60 }}</p>
-                <p><strong>Autor:</strong> {{ post.author }} | <strong>Categoría:</strong> {{ post.category.name }}</p>
-                <p><strong>Fecha:</strong> {{ post.created_at|date:"F j, Y" }}</p>
-                <a href="{% url 'post_detail' slug=post.slug %}">Ver más</a>
+    <!-- Botones para cambiar el modo de visualización -->
+    <div class="d-flex justify-content-end mb-4">
+        <button id="view-cards" class="btn btn-outline-primary me-2">Vista en tarjetas</button>
+        <button id="view-list" class="btn btn-outline-secondary">Vista en lista</button>
+    </div>
 
-            </article>
-        {% empty %}
-            <p>No hay publicaciones disponibles.</p>
-        {% endfor %}
-    </section>   
+    <!-- Contenedor para publicaciones -->
+    <div id="articles-container">
+        <!-- Vista en tarjetas -->
+        <div id="cards-view" class="row">
+            {% for post in posts %}
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    {% if post.image %}
+                    <img src="{% static 'images/post_images/' %}{{ post.image }}" class="card-img-top" alt="{{ post.title }}">
+                    {% else %}
+                    <img src="{% static 'images/default_image.jpg' %}" class="card-img-top" alt="Imagen por defecto">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+                        <p class="text-muted small"><strong>Autor:</strong> {{ post.author }} | <strong>Categoría:</strong> {{ post.category.name }}</p>
+                        <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-primary">Leer más</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
-    <a href="/add_post/">Agregar Nueva Publicación</a>
+        <!-- Vista en lista (inicialmente oculta) -->
+        <div id="list-view" class="d-none">
+            <ul class="list-group">
+                {% for post in posts %}
+                <li class="list-group-item">
+                    <h5>{{ post.title }}</h5>
+                    <p class="mb-1">{{ post.content|truncatewords:30 }}</p>
+                    <p class="text-muted small"><strong>Autor:</strong> {{ post.author }} | <strong>Categoría:</strong> {{ post.category.name }}</p>
+                    <a href="{% url 'post_detail' slug=post.slug %}" class="btn btn-link">Leer más</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para alternar vistas -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cardsView = document.getElementById('cards-view');
+        const listView = document.getElementById('list-view');
+        const viewCardsButton = document.getElementById('view-cards');
+        const viewListButton = document.getElementById('view-list');
+
+        viewCardsButton.addEventListener('click', () => {
+            cardsView.classList.remove('d-none');
+            listView.classList.add('d-none');
+        });
+
+        viewListButton.addEventListener('click', () => {
+            listView.classList.remove('d-none');
+            cardsView.classList.add('d-none');
+        });
+    });
+</script>
+
+<div class="text-center mt-4">
+    <a href="/add_post/" class="btn btn-success">Agregar Nueva Publicación</a>
+</div>
+</div>
 {% endblock %}
-
-
-<!- aca podemos modificar el listado de articulos, está deberia ser nuestra página principal para mostrar el catalogo y además ingresar a los textos -->

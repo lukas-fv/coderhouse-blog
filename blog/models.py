@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -26,9 +27,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class User(models.Model):
-    username = models.CharField(max_length=100)
-    email = models.EmailField()
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    bio = models.TextField(blank=True, null=True, max_length=500)
+    profile_picture = models.ImageField(upload_to="profile_pictures/", default="profile_pictures/default.jpg")
 
     def __str__(self):
-        return self.username
+        return f"Perfil de {self.user.username}"
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+
+    def __str__(self):
+        return f"Comentario de {self.user.username} en {self.post.title}"
